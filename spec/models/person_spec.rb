@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe "pages/help.html.erb" do
+describe Person do
   pending "add some examples to (or delete) #{__FILE__}"
 end
