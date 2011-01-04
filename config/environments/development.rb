@@ -2,7 +2,7 @@ Mysmallcharity::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Add new inflection rules using the following format 
-  Inflector.inflections do |inflect|
+  ActiveSupport::Inflector.inflections do |inflect|
     inflect.irregular 'person', 'persons'
   end
 
