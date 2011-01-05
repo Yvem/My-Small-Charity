@@ -1,10 +1,11 @@
 Mysmallcharity::Application.routes.draw do
+  resources :moral_persons
+  resources :natural_persons
+  resources :persons
+
   get "pages/home"
-
   get "pages/about"
-
   get "pages/help"
-
   get "pages/contact"
 
   # The priority is based upon order of creation:
