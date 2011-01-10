@@ -1,0 +1,21 @@
+<h1>Listing natural_persons</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @natural_persons.each do |natural_person| %>
+  <tr>
+    <td><%= link_to 'Show', natural_person %></td>
+    <td><%= link_to 'Edit', edit_natural_person_path(natural_person) %></td>
+    <td><%= link_to 'Destroy', natural_person, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Natural person', new_natural_person_path %>

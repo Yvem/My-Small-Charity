@@ -1,0 +1,2 @@
+module MoralPersonsHelper
+end
