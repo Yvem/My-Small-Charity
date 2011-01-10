@@ -1,4 +1,6 @@
 Mysmallcharity::Application.routes.draw do
+  resources :users
+
   resources :moral_persons
   resources :natural_persons
   resources :persons
@@ -7,6 +9,8 @@ Mysmallcharity::Application.routes.draw do
   get "pages/about"
   get "pages/help"
   get "pages/contact"
+
+  root :to => 'pages#home' # at the end of the file, as stated here http://guides.rubyonrails.org/routing.html
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
