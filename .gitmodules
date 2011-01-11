@@ -1,0 +1,3 @@
+[submodule "vendor/other/blueprint"]
+	path = vendor/other/blueprint
+	url = git://github.com/joshuaclayton/blueprint-css.git
