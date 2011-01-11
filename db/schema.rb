@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20110107143918) do
     t.string   "designation"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "type"
     t.string   "contact_email"
   end
 

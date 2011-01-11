@@ -8,3 +8,4 @@ doc/app
 *.swp
 *~
 .DS_Store
+db/development_structure.sql

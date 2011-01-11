@@ -1,11 +1,11 @@
 require 'spec_helper'
 
+require 'person_spec_shared'
+
+
 describe NaturalPerson do
 
-	# this is not really a test, this is a reminder !
-	# because "ActiveRecord" objects behave very differently than normal objects
-	# that should be taken in account in testing this class
-	it { should be_kind_of(ActiveRecord::Base) }
+	it_behaves_like "a person object"
 
 	it { should be_kind_of(Person) }
 
