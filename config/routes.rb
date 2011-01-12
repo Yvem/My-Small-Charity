@@ -1,15 +1,26 @@
 Mysmallcharity::Application.routes.draw do
 
+	# thoses ressources are served by ActiveScaffold
+	resources :societies        do as_routes end
 	resources :users            do as_routes end
 	resources :moral_persons    do as_routes end
 	resources :natural_persons  do as_routes end
 	resources :persons          do as_routes end
-
+	
+	# static pages (via "pages" controller)
 	get "pages/home"
 	get "pages/about"
 	get "pages/help"
 	get "pages/contact"
+	# raccourcis
+	match '/contact', :to => 'pages#contact'
+	match '/about',   :to => 'pages#about'
+	match '/help',    :to => 'pages#help'
 
+	#
+	match '/signup',  :to => 'users#new'
+
+	# default
 	root :to => 'pages#home' # at the end of the file, as stated here http://guides.rubyonrails.org/routing.html
 
 	

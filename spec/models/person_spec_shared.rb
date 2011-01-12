@@ -4,10 +4,10 @@ require 'spec_helper'
 shared_examples_for "a person object" do
 
 	before(:each) do
-		@default_valid_creation_params = { :designation => "Toto" }
-		if (defined? subclass_additional_valid_inits) then
-			@default_valid_creation_params = subclass_additional_valid_inits.update(@default_valid_creation_params)
-		end
+		# @default_valid_creation_params = { :designation => "Toto" }
+		# if (defined? subclass_additional_valid_inits) then
+			# @default_valid_creation_params = subclass_additional_valid_inits.update(@default_valid_creation_params)
+		# end
 	end
 
 	# this is not really a test, this is a reminder !
@@ -27,12 +27,12 @@ shared_examples_for "a person object" do
 
 		# and the designation error should inlude "can't be blank"
 		p.errors[:designation].should include("can't be blank")
+		p.errors[:designation].should eq(["can't be blank", "is too short (minimum is 1 characters)"]) # no more, no less
 	end
 
 	it "should ensure that designation is > 1 char" do
 		# blank designation provided (bad !)
-		@default_valid_creation_params[:designation] = ""
-		p = described_class.new(@default_valid_creation_params)
+		p = described_class.new(:designation => "")
 
 		# object should be invalid
 		p.valid?.should be_false
@@ -40,28 +40,28 @@ shared_examples_for "a person object" do
 		# one error should be related to the designation
 		p.errors.should include(:designation)
 
-		# and the designation error should inlude "is too short (minimum is 1 characters)"
+		# and the designation error should include "is too short (minimum is 1 characters)"
 		p.errors[:designation].should include("is too short (minimum is 1 characters)")
+		p.errors[:designation].should eq(["can't be blank", "is too short (minimum is 1 characters)"]) # no more, no less
 
 		# and now, limit test
-		@default_valid_creation_params[:designation] = "a"
-		p = described_class.new(@default_valid_creation_params)
+		p = described_class.new(:designation => "a")
 
-		# should be OK
-		p.valid?.should be_true
+		# can be OK or not OK, but no error should be related to the designation
+		p.valid? # to trigger the validation
+		p.errors.should_not include(:designation)
 	end
 
 	it "should ensure that designation is <= 70 char" do
 		# 70 chars = OK (limit)
-		@default_valid_creation_params[:designation] = "1111111111222222222233333333334444444444555555555566666666667777777777"
-		p = described_class.new(@default_valid_creation_params)
+		p = described_class.new(:designation => "1111111111222222222233333333334444444444555555555566666666667777777777")
 
-		# should be OK
-		p.valid?.should be_true
+		# can be OK or not OK, but no error should be related to the designation
+		p.valid? # to trigger the validation
+		p.errors.should_not include(:designation)
 
 		# 71 chars = too much !
-		@default_valid_creation_params[:designation] = "11111111112222222222333333333344444444445555555555666666666677777777778"
-		p = described_class.new(@default_valid_creation_params)
+		p = described_class.new(:designation => "11111111112222222222333333333344444444445555555555666666666677777777778")
 
 		# object should be invalid
 		p.valid?.should be_false
@@ -71,6 +71,7 @@ shared_examples_for "a person object" do
 
 		# and the designation error should inlude "is too long (maximum is 70 characters)"
 		p.errors[:designation].should include("is too long (maximum is 70 characters)")
+		p.errors[:designation].should eq(["is too long (maximum is 70 characters)"]) # no more, no less
 	end
 
 end

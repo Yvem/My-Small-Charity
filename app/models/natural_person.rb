@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110111170357
+# Schema version: 20110112095703
 #
 # Table name: persons
 #
@@ -9,6 +9,7 @@
 #  updated_at    :datetime
 #  type          :string(255)
 #  contact_email :string(255)
+#  owner_id      :integer(4)
 #
 
 class NaturalPerson < Person

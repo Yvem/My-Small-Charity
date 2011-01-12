@@ -18,6 +18,7 @@ gem 'mysql2'
 group :development, :test do
   gem 'rspec-rails', '>= 2.4.0'
   gem 'annotate-models', '>= 1.0.4'
+  gem 'piston'
 end
 
 group :test do
