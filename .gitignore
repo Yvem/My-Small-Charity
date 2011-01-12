@@ -12,4 +12,5 @@ db/development_structure.sql
 public/javascript/active_scaffold/*
 public/stylesheets/active_scaffold/*
 public/images/active_scaffold/*
+public/blank.html
 webrat.log
