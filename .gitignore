@@ -9,3 +9,7 @@ doc/app
 *~
 .DS_Store
 db/development_structure.sql
+public/javascript/active_scaffold/*
+public/stylesheets/active_scaffold/*
+public/images/active_scaffold/*
+webrat.log
