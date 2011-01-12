@@ -1,3 +1,15 @@
 [submodule "vendor/other/blueprint"]
 	path = vendor/other/blueprint
 	url = git://github.com/joshuaclayton/blueprint-css.git
+[submodule "vendor/plugins/active_scaffold"]
+	path = vendor/plugins/active_scaffold
+	url = git://github.com/vhochstein/active_scaffold.git
+[submodule "vendor/plugins/verification"]
+	path = vendor/plugins/verification
+	url = git://github.com/rails/verification.git
+[submodule "vendor/plugins/render_component"]
+	path = vendor/plugins/render_component
+	url = git://github.com/vhochstein/render_component.git
+[submodule "vendor/other/prototype"]
+	path = vendor/other/prototype
+	url = git://github.com/sstephenson/prototype.git

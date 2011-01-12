@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110107143918
+# Schema version: 20110111170357
 #
 # Table name: persons
 #
@@ -7,6 +7,7 @@
 #  designation   :string(255)
 #  created_at    :datetime
 #  updated_at    :datetime
+#  type          :string(255)
 #  contact_email :string(255)
 #
 
@@ -19,6 +20,10 @@ This class is the mother class.
 =end
 class Person < ActiveRecord::Base
 
+	# This is a trick to make this class kind of "abstract"
+	# when we are unable to use abstract_class due to STI
+	validates_presence_of :type, :message => "This class is abstract, you cannot instantiate it."
+	
 	# designation
 	# common, usual designation for this person.
 	# ActiveRecord validation :
