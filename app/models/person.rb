@@ -31,7 +31,7 @@ class Person < ActiveRecord::Base
 	# common, usual designation for this person.
 	# ActiveRecord validation :
 	validates :designation, :presence => true,
-	                        :uniqueness => { :case_sensitive => false }
+	                        :uniqueness => { :case_sensitive => false },
 	                        :length => { :minimum => 1, :maximum => 70 }
 
 	# in this class, we don't know the answer.
