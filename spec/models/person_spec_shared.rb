@@ -4,10 +4,10 @@ require 'spec_helper'
 shared_examples_for "a person object" do
 
 	before(:each) do
-		# @default_valid_creation_params = { :designation => "Toto" }
-		# if (defined? subclass_additional_valid_inits) then
-			# @default_valid_creation_params = subclass_additional_valid_inits.update(@default_valid_creation_params)
-		# end
+		@default_valid_creation_params = { :designation => "Toto" }
+		if (defined? subclass_additional_valid_inits) then
+			@default_valid_creation_params.merge(subclass_additional_valid_inits)
+		end
 	end
 
 	# this is not really a test, this is a reminder !
@@ -15,6 +15,10 @@ shared_examples_for "a person object" do
 	# that should be taken in account in testing this class
 	it { should be_kind_of(ActiveRecord::Base) }
 	
+	it "should create a new instance given valid attributes" do
+		described_class.create!(@default_valid_creation_params)
+	end
+
 	it "should always have a designation" do
 		# no designation provided (bad !)
 		p = described_class.new
@@ -73,5 +77,9 @@ shared_examples_for "a person object" do
 		p.errors[:designation].should include("is too long (maximum is 70 characters)")
 		p.errors[:designation].should eq(["is too long (maximum is 70 characters)"]) # no more, no less
 	end
+	
+	it "should ensure that designation is unique"
+	
+	it "should prevent messing with STI"
 
 end

@@ -1,5 +1,7 @@
 Mysmallcharity::Application.routes.draw do
 
+  resources :memberships
+
 	# thoses ressources are served by ActiveScaffold
 	resources :societies        do as_routes end
 	resources :users            do as_routes end

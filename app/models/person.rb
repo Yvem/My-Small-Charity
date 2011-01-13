@@ -1,15 +1,15 @@
 # == Schema Information
-# Schema version: 20110112095703
+# Schema version: 20110113161519
 #
 # Table name: persons
 #
 #  id            :integer(4)      not null, primary key
-#  designation   :string(255)
-#  created_at    :datetime
-#  updated_at    :datetime
 #  type          :string(255)
+#  designation   :string(255)
 #  contact_email :string(255)
 #  owner_id      :integer(4)
+#  created_at    :datetime
+#  updated_at    :datetime
 #
 
 =begin
@@ -21,6 +21,8 @@ This class is the mother class.
 =end
 class Person < ActiveRecord::Base
 
+	attr_accessible :designation
+
 	# This is a trick to make this class kind of "abstract"
 	# when we are unable to use abstract_class due to STI
 	validates_presence_of :type, :message => "This class is abstract, you cannot instantiate it."
@@ -28,7 +30,9 @@ class Person < ActiveRecord::Base
 	# designation
 	# common, usual designation for this person.
 	# ActiveRecord validation :
-	validates :designation, :uniqueness => true, :presence => true, :length => { :minimum => 1, :maximum => 70 }
+	validates :designation, :presence => true,
+	                        :uniqueness => { :case_sensitive => false }
+	                        :length => { :minimum => 1, :maximum => 70 }
 
 	# in this class, we don't know the answer.
 	# child classes will have to redefine this.

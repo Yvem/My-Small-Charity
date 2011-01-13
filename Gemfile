@@ -16,9 +16,12 @@ gem 'mysql2'
 
 ####### YEJ : Development tools #######
 group :development, :test do
-  gem 'rspec-rails', '>= 2.4.0'
-  gem 'annotate-models', '>= 1.0.4'
-  gem 'piston'
+	# Annotate is a tool for annotating ActiveRecord subclasses
+	gem 'annotate-models', '>= 1.0.4'
+	# for unit tests
+	gem 'rspec-rails', '>= 2.4.0'
+	# for managing external dependencies
+	gem 'piston'
 end
 
 group :test do
