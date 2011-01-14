@@ -5,8 +5,8 @@ shared_examples_for "a person object" do
 
 	before(:each) do
 		@default_valid_creation_params = { :designation => "Toto" }
-		if (defined? subclass_additional_valid_inits) then
-			@default_valid_creation_params.merge(subclass_additional_valid_inits)
+		if (defined? subclass_additional_default_attrs) then
+			@default_valid_creation_params = @default_valid_creation_params.merge(subclass_additional_default_attrs)
 		end
 	end
 
@@ -16,7 +16,15 @@ shared_examples_for "a person object" do
 	it { should be_kind_of(ActiveRecord::Base) }
 	
 	it "should create a new instance given valid attributes" do
-		described_class.create!(@default_valid_creation_params)
+		p = described_class.new(@default_valid_creation_params)
+		
+		# unless it is an abstract class...
+		if not p.valid? then
+			#puts @default_valid_creation_params
+			#puts p.errors
+			p.errors[:type].should eq(["This class is abstract, you cannot instantiate it."]) # no more, no less
+		end
+		
 	end
 
 	it "should always have a designation" do
@@ -24,7 +32,7 @@ shared_examples_for "a person object" do
 		p = described_class.new
 
 		# object should be invalid
-		p.valid?.should be_false
+		p.should_not be_valid
 
 		# one error should be related to the designation
 		p.errors.should include(:designation)
@@ -39,7 +47,7 @@ shared_examples_for "a person object" do
 		p = described_class.new(:designation => "")
 
 		# object should be invalid
-		p.valid?.should be_false
+		p.should_not be_valid
 
 		# one error should be related to the designation
 		p.errors.should include(:designation)
@@ -68,7 +76,7 @@ shared_examples_for "a person object" do
 		p = described_class.new(:designation => "11111111112222222222333333333344444444445555555555666666666677777777778")
 
 		# object should be invalid
-		p.valid?.should be_false
+		p.should_not be_valid
 
 		# one error should be related to the designation
 		p.errors.should include(:designation)
@@ -78,8 +86,25 @@ shared_examples_for "a person object" do
 		p.errors[:designation].should eq(["is too long (maximum is 70 characters)"]) # no more, no less
 	end
 	
-	it "should ensure that designation is unique"
-	
-	it "should prevent messing with STI"
+	it "should ensure that designation is unique" do
+		# 1st person
+		p1 = described_class.new(@default_valid_creation_params)
+		
+		# if the class is abstract, no need to check designation
+		if not p1.valid? then
+			p1.errors[:type].should eq(["This class is abstract, you cannot instantiate it."]) # no more, no less
+		else
+			# not abstract. Continue test.
+			p1.save!
+			
+			# 2nd person with the same attributes
+			p2 = described_class.new(@default_valid_creation_params)
+			
+			p2.valid? # to trigger the validation
+			
+			p2.errors[:designation].should include("has already been taken")
+			p2.errors[:designation].should eq(["has already been taken"]) # no more, no less
+		end
+	end
 
 end

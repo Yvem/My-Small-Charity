@@ -21,8 +21,11 @@ This class is the mother class.
 =end
 class Person < ActiveRecord::Base
 
+	### access control
 	attr_accessible :designation
 
+	### validations
+	
 	# This is a trick to make this class kind of "abstract"
 	# when we are unable to use abstract_class due to STI
 	validates_presence_of :type, :message => "This class is abstract, you cannot instantiate it."
@@ -32,8 +35,10 @@ class Person < ActiveRecord::Base
 	# ActiveRecord validation :
 	validates :designation, :presence => true,
 	                        :uniqueness => { :case_sensitive => false },
-	                        :length => { :minimum => 1, :maximum => 70 }
-
+	                        :length => { :within => 1..70 }
+	
+	### implementation
+	
 	# in this class, we don't know the answer.
 	# child classes will have to redefine this.
 	def is_natural?

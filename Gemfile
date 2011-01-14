@@ -3,7 +3,8 @@ source 'http://rubygems.org'
 ####### YEJ : REM : bundle install
 
 ####### YEJ : Rails itself #######
-gem 'rails', '3.0.3'
+#gem 'rails', '~> 2'
+gem 'rails', '~> 3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -12,22 +13,25 @@ gem 'rails', '3.0.3'
 gem 'mysql2'
 
 ####### YEJ : Modules #######
-
+gem 'gravatar_image_tag', '1.0.0.pre2'
 
 ####### YEJ : Development tools #######
 group :development, :test do
 	# Annotate is a tool for annotating ActiveRecord subclasses
-	gem 'annotate-models', '>= 1.0.4'
+	gem 'annotate-models'
 	# for unit tests
-	gem 'rspec-rails', '>= 2.4.0'
+	gem 'rspec-rails'
 	# for managing external dependencies
 	gem 'piston'
+	# faster server
+	gem 'thin'
 end
 
 group :test do
-  gem 'rspec', '>= 2.4.0'
-  gem 'webrat', '>= 0.7.3'
+  gem 'rspec'
+  gem 'webrat'
   gem 'spork'
+  gem 'factory_girl_rails'
 end
 
 

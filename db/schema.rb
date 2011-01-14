@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110113161519) do
+ActiveRecord::Schema.define(:version => 20110114084647) do
 
   create_table "memberships", :force => true do |t|
     t.integer  "member_id"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(:version => 20110113161519) do
     t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_hash"
+    t.string   "salt"
   end
 
   create_table "sessions", :force => true do |t|

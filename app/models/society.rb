@@ -14,12 +14,16 @@
 
 class Society < MoralPerson
 	
+	# access control
 	attr_accessible :owner_id
 
+	# validations
 	validates :owner_id, :presence => true
 	
 	# associations
 	belongs_to :user, :foreign_key => "owner_id"
-	has_many :membership
-	 
+	has_many :memberships
+
+	# implementation
+	
 end
